@@ -11,7 +11,6 @@ on:
 
 jobs:
   validate:
-    name: Validate Kubernetes Manifests
     runs-on: ubuntu-latest
 
     steps:
@@ -20,8 +19,7 @@ jobs:
 
       - name: Install kubeconform
         run: |
-          curl -L https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz \
-          | tar xz
+          curl -L https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz | tar xz
           sudo mv kubeconform /usr/local/bin/
 
       - name: Validate deployment.yaml
@@ -30,5 +28,5 @@ jobs:
       - name: Validate service.yaml
         run: kubeconform -strict service.yaml
 
-      - name: Validation Successful
+      - name: Success
         run: echo "✅ All Kubernetes manifests are valid."
