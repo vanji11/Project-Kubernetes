@@ -1,0 +1,36 @@
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Environment files
+.env
+.env.*
+
+# Kubernetes secrets (if added later)
+secret.yaml
+secrets.yaml
+
+# Backup files
+*.bak
+*.swp
+
+# Terraform (for future use)
+.terraform/
+*.tfstate
+*.tfstate.*

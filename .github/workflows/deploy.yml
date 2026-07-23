@@ -1,0 +1,25 @@
+name: Kubernetes CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: latest
+
+      - name: Validate deployment.yaml
+        run: kubectl apply --dry-run=client -f deployment.yaml
+
+      - name: Validate service.yaml
+        run: kubectl apply --dry-run=client -f service.yaml
