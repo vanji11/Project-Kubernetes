@@ -4,21 +4,31 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
   validate:
+    name: Validate Kubernetes Manifests
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install kubectl
-        uses: azure/setup-kubectl@v4
-        with:
-          version: latest
+      - name: Install kubeconform
+        run: |
+          curl -L https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz \
+          | tar xz
+          sudo mv kubeconform /usr/local/bin/
 
       - name: Validate deployment.yaml
-        run: kubectl apply --dry-run=client --validate=false -f deployment.yaml
+        run: kubeconform -strict deployment.yaml
 
       - name: Validate service.yaml
-        run: kubectl apply --dry-run=client --validate=false -f service.yaml
+        run: kubeconform -strict service.yaml
+
+      - name: Validation Successful
+        run: echo "✅ All Kubernetes manifests are valid."
