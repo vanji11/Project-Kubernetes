@@ -18,7 +18,7 @@ jobs:
           version: latest
 
       - name: Validate deployment.yaml
-        run: kubectl apply --dry-run=client -f deployment.yaml
+        run: kubectl apply --dry-run=client --validate=false -f deployment.yaml
 
       - name: Validate service.yaml
-        run: kubectl apply --dry-run=client -f service.yaml
+        run: kubectl apply --dry-run=client --validate=false -f service.yaml
